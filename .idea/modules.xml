@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/aws-lambda-java.iml" filepath="$PROJECT_DIR$/.idea/aws-lambda-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/valida-arquivo.iml" filepath="$PROJECT_DIR$/valida-arquivo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/valida-arquivo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/valida-arquivo.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/valida-arquivo.test.iml" filepath="$PROJECT_DIR$/.idea/modules/valida-arquivo.test.iml" />
+    </modules>
+  </component>
+</project>
