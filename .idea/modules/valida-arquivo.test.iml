@@ -1,48 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="valida-arquivo:test" external.linked.project.path="$MODULE_DIR$/../../valida-arquivo" external.root.project.path="$MODULE_DIR$/../../valida-arquivo" external.system.id="GRADLE" external.system.module.group="br.com.softwalter" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <output-test url="file://$MODULE_DIR$/../../valida-arquivo/build/classes/java/test" />
-    <exclude-output />
-    <content url="file://$MODULE_DIR$/../../valida-arquivo/src/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../valida-arquivo/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../valida-arquivo/src/test/resources" type="java-test-resource" />
-    </content>
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="valida-arquivo.main" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-lambda-java-events:3.11.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-lambda:1.12.669" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-s3:1.11.455" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-sqs:1.12.669" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-lambda-java-core:1.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.17.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.17.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter:5.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: joda-time:joda-time:2.10.8" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-core:1.12.669" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:jmespath-java:1.12.669" level="project" />
-    <orderEntry type="library" name="Gradle: com.amazonaws:aws-java-sdk-kms:1.11.455" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-params:5.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.13" level="project" />
-    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
-    <orderEntry type="library" name="Gradle: commons-codec:commons-codec:1.15" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.7" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.12.7.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apiguardian:apiguardian-api:1.1.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.junit.platform:junit-platform-commons:1.9.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.opentest4j:opentest4j:1.2.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.13" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.12.7" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.12.7" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.amazonaws:aws-lambda-java-log4j2:1.5.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.logging.log4j:log4j-slf4j18-impl:2.17.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.slf4j:slf4j-api:1.8.0-beta4" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.9.1" level="project" />
-  </component>
+<module version="4">
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="c0395691-3898-4ee3-849f-27313f26137f" />
   </component>
-  <component name="TestModuleProperties" production-module="valida-arquivo.main" />
 </module>

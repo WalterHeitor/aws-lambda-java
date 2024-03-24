@@ -3,8 +3,6 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="valida-arquivo" target="17" />
-      <module name="valida-arquivo.main" target="17" />
-      <module name="valida-arquivo.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
