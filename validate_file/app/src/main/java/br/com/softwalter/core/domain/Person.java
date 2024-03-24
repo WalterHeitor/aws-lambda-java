@@ -1,11 +1,11 @@
-package br.com.softwalter.entity;
+package br.com.softwalter.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Pessoa implements Serializable {
+public class Person implements Serializable {
 
     @JsonProperty("id")
     private String id;
@@ -20,11 +20,10 @@ public class Pessoa implements Serializable {
     @JsonProperty("ip_address")
     private String ipAddress;
 
-
-    public Pessoa() {
+    public Person() {
     }
 
-    public Pessoa(String id, String firstName, String lastName, String email, String gender, String ipAddress) {
+    public Person(String id, String firstName, String lastName, String email, String gender, String ipAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,14 +32,12 @@ public class Pessoa implements Serializable {
         this.ipAddress = ipAddress;
     }
 
-    // Getters e Setters omitidos para brevidade
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return Objects.equals(id, pessoa.id) && Objects.equals(firstName, pessoa.firstName) && Objects.equals(lastName, pessoa.lastName) && Objects.equals(email, pessoa.email) && Objects.equals(gender, pessoa.gender) && Objects.equals(ipAddress, pessoa.ipAddress);
+        Person person = (Person) o;
+        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email) && Objects.equals(gender, person.gender) && Objects.equals(ipAddress, person.ipAddress);
     }
 
     @Override
