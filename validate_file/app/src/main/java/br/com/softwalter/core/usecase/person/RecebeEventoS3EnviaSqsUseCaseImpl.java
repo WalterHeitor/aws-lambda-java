@@ -3,6 +3,8 @@ package br.com.softwalter.core.usecase.person;
 import br.com.softwalter.adpters.s3.ClientS3;
 import br.com.softwalter.adpters.sqs.ClientSqs;
 import br.com.softwalter.core.domain.Person;
+import br.com.softwalter.core.usecase.ports.input.RecebeEventoS3;
+import br.com.softwalter.core.usecase.ports.output.EnviaMenssagensSQS;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
 

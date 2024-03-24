@@ -1,4 +1,4 @@
-package br.com.softwalter.core.usecase.person;
+package br.com.softwalter.core.usecase.ports.output;
 
 import br.com.softwalter.core.domain.Person;
 

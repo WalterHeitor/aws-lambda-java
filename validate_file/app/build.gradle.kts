@@ -49,4 +49,6 @@ java {
 application {
     // Define the main class for the application.
     mainClass = "br.com.softwalter.App"
+    // validate_file/app/build/libs/app.jar
+
 }

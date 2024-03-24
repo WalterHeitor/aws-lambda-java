@@ -1,7 +1,7 @@
 package br.com.softwalter.adpters.s3;
 
 import br.com.softwalter.core.domain.Person;
-import br.com.softwalter.core.usecase.person.RecebeEventoS3;
+import br.com.softwalter.core.usecase.ports.input.RecebeEventoS3;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.builder.AwsClientBuilder;

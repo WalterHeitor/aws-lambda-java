@@ -1,7 +1,7 @@
 package br.com.softwalter.adpters.sqs;
 
 import br.com.softwalter.core.domain.Person;
-import br.com.softwalter.core.usecase.person.EnviaMenssagensSQS;
+import br.com.softwalter.core.usecase.ports.output.EnviaMenssagensSQS;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
