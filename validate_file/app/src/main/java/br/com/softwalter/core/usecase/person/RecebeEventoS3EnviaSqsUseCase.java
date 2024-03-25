@@ -6,5 +6,5 @@ import java.io.IOException;
 
 public interface RecebeEventoS3EnviaSqsUseCase {
 
-    public void execute(S3Event s3Event) throws IOException;
+    void execute(S3Event s3Event) throws IOException;
 }

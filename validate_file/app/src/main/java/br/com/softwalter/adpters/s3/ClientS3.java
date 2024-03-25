@@ -8,8 +8,9 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.ThreadContext;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,10 +21,10 @@ import java.util.List;
 
 public class ClientS3 implements RecebeEventoS3 {
 
-    private static final Log LOG = LogFactory.getLog(ClientS3.class);
+//    private static final Logger LOG = LogManager.getLogger(ClientS3.class);
     AmazonS3 s3Client = AmazonS3ClientBuilder
             .standard()
-            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:4566/", "us-east-1")) // localstack endpoint configuration
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://s3.us-east-1.localhost.localstack.cloud:4566", "us-east-1")) // localstack endpoint configuration
             .withCredentials(new DefaultAWSCredentialsProviderChain())
             .withPathStyleAccessEnabled(true)
             .build();
@@ -33,14 +34,14 @@ public class ClientS3 implements RecebeEventoS3 {
 
         try {
 
+//            LOG.debug("getObjectContent S3 bucketName: {}", bucketName);
             S3Object object = s3Client.getObject(bucketName, objectKey);
-            InputStream objectData = object.getObjectContent();
-            BufferedReader reader;
-            reader = getBufferedReader(objectData);
-
             if (!object.getKey().toLowerCase().endsWith(".csv")) {
                 throw new IllegalArgumentException("O arquivo não é um arquivo CSV.");
             }
+            InputStream objectData = object.getObjectContent();
+            BufferedReader reader;
+            reader = getBufferedReader(objectData);
 
             String headerLine = reader.readLine();
             String[] columns = headerLine.split(","); // Ou qualquer outro separador que seu CSV use
@@ -58,8 +59,8 @@ public class ClientS3 implements RecebeEventoS3 {
             String line;
             List<Person> people = new ArrayList<>();
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(","); // Ou qualquer outro separador que seu CSV use
-                if (parts.length == 6) { // Certifique-se de que a linha tenha todos os campos necessários
+                String[] parts = line.split(",");
+                if (parts.length == 6) {
                     String id = parts[0];
                     String firstName = parts[1];
                     String lasName = parts[2];
@@ -69,12 +70,14 @@ public class ClientS3 implements RecebeEventoS3 {
 
                     Person person = new Person(id, firstName, lasName, email, gender, ipAddress);
                     people.add(person);
+//                    System.out.println("Added person "+  person);
                 } else {
-                    LOG.debug("Ignorando linha inválida: " + line);
+                    System.out.println("Ignorando linha inválida: "+ line);
                 }
             }
             reader.close();
 
+//            LOG.debug("Fim do processamento do arquivo csv!");
             return people;
         } catch (AmazonServiceException e) {
             throw new IOException("Erro ao obter objeto do S3: " + e.getMessage());

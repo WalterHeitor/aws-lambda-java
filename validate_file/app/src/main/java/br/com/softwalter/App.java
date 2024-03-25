@@ -1,37 +1,43 @@
 
 package br.com.softwalter;
 
-import br.com.softwalter.core.domain.Person;
-import br.com.softwalter.adpters.s3.ClientS3;
-import br.com.softwalter.adpters.sqs.ClientSqs;
 import br.com.softwalter.core.usecase.person.RecebeEventoS3EnviaSqsUseCase;
 import br.com.softwalter.core.usecase.person.RecebeEventoS3EnviaSqsUseCaseImpl;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import java.io.IOException;
 import java.util.List;
 
+
 public class App implements RequestHandler<S3Event, Void> {
 
-    private static final Log LOG = LogFactory.getLog(App.class);
+//    private static final Logger logger = LogManager.getLogger(App.class);
     private final RecebeEventoS3EnviaSqsUseCase recebeEventoS3EnviaSqsUseCase =
             new RecebeEventoS3EnviaSqsUseCaseImpl();
 
     @Override
     public Void handleRequest(S3Event s3Event, Context context) {
+
+//        ThreadContext.put("threadName", Thread.currentThread().getName());
         try {
+
+//            logger.info("Iniciando processamento!");
             recebeEventoS3EnviaSqsUseCase.execute(s3Event);
+//            logger.info("Fim do processamento!");
+
         } catch (IOException e) {
-            LOG.error("Erro ao processar evento S3 ou no envio SQS: " + e.getMessage());
+            System.out.println("Erro ao processar evento S3 ou no envio SQS: {}"+ e.getMessage());
         }
         return null;
     }
-
 
 
     public static void main(String[] args) {

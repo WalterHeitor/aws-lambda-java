@@ -1,0 +1,1 @@
+{"errorMessage":"Error loading class br.com.softwalter.App: org/apache/commons/logging/LogFactory","errorType":"java.lang.NoClassDefFoundError"}
