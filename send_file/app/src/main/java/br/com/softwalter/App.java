@@ -5,7 +5,6 @@ import br.com.softwalter.entity.Person;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.amazonaws.services.s3.AmazonS3;
@@ -15,7 +14,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Paragraph;
 import com.lowagie.text.html.simpleparser.HTMLWorker;
 import com.lowagie.text.pdf.PdfWriter;
 import org.slf4j.Logger;
@@ -27,8 +25,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 public class App implements RequestHandler<SQSEvent, Void> {
 
@@ -111,11 +107,10 @@ public class App implements RequestHandler<SQSEvent, Void> {
         sqsEvent.setRecords(Collections.singletonList(msg));
 
 
-
         // Crie uma instância de App e invoque o método handleRequest
         App app = new App();
         app.handleRequest(sqsEvent, null);
     }
 
-    // Classe de contexto simulada
+
 }
