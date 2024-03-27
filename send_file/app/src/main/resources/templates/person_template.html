@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Informações da Pessoa</title>
+</head>
+<body>
+<h1>Informações da Pessoa</h1>
+<p>ID: <span th:text="${id}"></span></p>
+<p>Nome: <span th:text="${first_name}"></span> <span th:text="${last_name}"></span></p>
+<p>Email: <span th:text="${email}"></span></p>
+<p>Gênero: <span th:text="${gender}"></span></p>
+<p>Endereço IP: <span th:text="${ip_address}"></span></p>
+</body>
+</html>
