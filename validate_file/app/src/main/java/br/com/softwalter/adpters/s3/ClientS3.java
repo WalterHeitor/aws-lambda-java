@@ -8,9 +8,8 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.util.List;
 
 public class ClientS3 implements RecebeEventoS3 {
 
-//    private static final Logger LOG = LogManager.getLogger(ClientS3.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ClientS3.class.getName());
     AmazonS3 s3Client = AmazonS3ClientBuilder
             .standard()
             .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://s3.us-east-1.localhost.localstack.cloud:4566", "us-east-1")) // localstack endpoint configuration
@@ -34,7 +33,7 @@ public class ClientS3 implements RecebeEventoS3 {
 
         try {
 
-//            LOG.debug("getObjectContent S3 bucketName: {}", bucketName);
+            LOG.debug("getObjectContent S3 bucketName: {}", bucketName);
             S3Object object = s3Client.getObject(bucketName, objectKey);
             if (!object.getKey().toLowerCase().endsWith(".csv")) {
                 throw new IllegalArgumentException("O arquivo não é um arquivo CSV.");
@@ -70,14 +69,14 @@ public class ClientS3 implements RecebeEventoS3 {
 
                     Person person = new Person(id, firstName, lasName, email, gender, ipAddress);
                     people.add(person);
-//                    System.out.println("Added person "+  person);
+                    LOG.debug("Added person {}",  person);
                 } else {
-                    System.out.println("Ignorando linha inválida: "+ line);
+                    LOG.error("Ignorando linha inválida: {}", line);
                 }
             }
             reader.close();
 
-//            LOG.debug("Fim do processamento do arquivo csv!");
+            LOG.debug("Fim do processamento do arquivo csv!");
             return people;
         } catch (AmazonServiceException e) {
             throw new IOException("Erro ao obter objeto do S3: " + e.getMessage());

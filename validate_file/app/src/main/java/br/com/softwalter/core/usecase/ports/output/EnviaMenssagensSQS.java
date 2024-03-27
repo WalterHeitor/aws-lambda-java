@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EnviaMenssagensSQS {
 
-    public void sendToSQS(List<Person> personList);
+    void sendToSQS(List<Person> personList);
 }
