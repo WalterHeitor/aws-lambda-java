@@ -7,10 +7,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.lambda.runtime.events.models.s3.S3EventNotification;
-
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.io.IOException;
@@ -19,22 +17,21 @@ import java.util.List;
 
 public class App implements RequestHandler<S3Event, Void> {
 
-//    private static final Logger logger = LogManager.getLogger(App.class);
+    private static final Logger logger = LoggerFactory.getLogger(App.class.getName());
     private final RecebeEventoS3EnviaSqsUseCase recebeEventoS3EnviaSqsUseCase =
             new RecebeEventoS3EnviaSqsUseCaseImpl();
 
     @Override
     public Void handleRequest(S3Event s3Event, Context context) {
 
-//        ThreadContext.put("threadName", Thread.currentThread().getName());
         try {
 
-//            logger.info("Iniciando processamento!");
+            logger.info("Iniciando processamento!");
             recebeEventoS3EnviaSqsUseCase.execute(s3Event);
-//            logger.info("Fim do processamento!");
+            logger.info("Fim do processamento!");
 
         } catch (IOException e) {
-            System.out.println("Erro ao processar evento S3 ou no envio SQS: {}"+ e.getMessage());
+            logger.error("Erro ao processar evento S3 ou no envio SQS: {}", e.getMessage());
         }
         return null;
     }

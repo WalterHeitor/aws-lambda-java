@@ -27,13 +27,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs
     implementation("com.amazonaws:aws-java-sdk-sqs:1.12.681")
 
-//    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-//    implementation("org.slf4j:slf4j-simple:2.0.7")
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    implementation("org.slf4j:slf4j-simple:2.0.7")
 
-    implementation ("org.apache.logging.log4j:log4j-api:2.14.0")
-    implementation ("org.apache.logging.log4j:log4j-core:2.14.0")
-    implementation ("org.apache.logging.log4j:log4j-slf4j-impl:2.14.0")
-    annotationProcessor ("org.apache.logging.log4j:log4j-core:2.14.0")
 
     implementation(libs.guava)
 }
@@ -49,15 +45,15 @@ tasks.jar {
 }
 
 
-testing {
-    suites {
-        // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
-            // Use JUnit Jupiter test framework
-            useJUnitJupiter("5.10.0")
-        }
-    }
-}
+//testing {
+//    suites {
+//        // Configure the built-in test suite
+//        val test by getting(JvmTestSuite::class) {
+//            // Use JUnit Jupiter test framework
+//            useJUnitJupiter("5.10.0")
+//        }
+//    }
+//}
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
