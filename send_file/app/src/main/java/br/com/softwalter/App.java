@@ -3,6 +3,7 @@ package br.com.softwalter;
 import br.com.softwalter.config.ThymeleafConfiguration;
 import br.com.softwalter.entity.Contract;
 import br.com.softwalter.dto.PersonDTO;
+import br.com.softwalter.entity.ContractType;
 import br.com.softwalter.entity.Person;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.builder.AwsClientBuilder;
@@ -61,10 +62,13 @@ public class App implements RequestHandler<SQSEvent, Void> {
     public Void handleRequest(SQSEvent sqsEvent, Context context) {
         try {
             for (SQSEvent.SQSMessage msg : sqsEvent.getRecords()) {
+                logger.info("SQS message: {}", msg);
                 String messageBody = msg.getBody();
                 // Converte a mensagem JSON em um objeto Person
                 PersonDTO personDTO = parseMessageToPerson(messageBody);
+                logger.debug("personDTO: {}", personDTO.toString());
                 Person person = personDTO.toEntity();
+                logger.debug("person: {}", person.toString());
                 List<Contract> contracts = getContractsFromDatabase(person.getId());
                 List<String>htmlContents = new ArrayList<>();
                 // Gera o conteúdo HTML a partir do template Thymeleaf e dos dados da pessoa
@@ -94,12 +98,13 @@ public class App implements RequestHandler<SQSEvent, Void> {
 
         // Adicionando contratos fictícios à lista
         Random random = new Random();
-        for (int i = 0; i < 5; i++) {
+        int i = 0;
+        for (ContractType contractType : ContractType.values()) {
+
             // Gerando IDs fictícios para os contratos
             String contractId = "CON" + (i + 1);
 
             // Título do contrato fictício
-            String title = "Contrato " + contractId;
 
             // Descrição do contrato fictícia
             String description = "Este é o contrato " + contractId + ", que contém detalhes importantes.";
@@ -115,8 +120,9 @@ public class App implements RequestHandler<SQSEvent, Void> {
             String status = random.nextBoolean() ? "Ativo" : "Inativo"; // Status aleatório entre Ativo e Inativo
 
             // Criando um novo contrato e adicionando à lista
-            Contract contract = new Contract(contractId, title, description, startDate, endDate, value, status);
+            Contract contract = new Contract(contractId, contractType, description, startDate, endDate, value, status);
             contracts.add(contract);
+            i++;
         }
 
         return contracts;
@@ -153,7 +159,24 @@ public class App implements RequestHandler<SQSEvent, Void> {
         final org.thymeleaf.context.Context thymeleafContext = new org.thymeleaf.context.Context();
         thymeleafContext.setVariable("person", person);
         thymeleafContext.setVariable("contract", contract);
-        return templateEngine.process("person_contract_template", thymeleafContext);
+        if (contract.getTitle() != null) {
+            if (contract.getTitle().equals(ContractType.BACKEND_JAVA)) {
+                return templateEngine.process("person_contract_template_backend", thymeleafContext);
+            } else if (contract.getTitle().equals(ContractType.FRONTEND_ANGULAR)) {
+                return templateEngine.process("person_contract_template_frontend", thymeleafContext);
+            } else if (contract.getTitle().equals(ContractType.MOBILE_IOS)) {
+                return templateEngine.process("person_contract_template_mobile_ios", thymeleafContext);
+            } else if (contract.getTitle().equals(ContractType.MOBILE_ANDROID)) {
+                return templateEngine.process("person_contract_template_mobile_android", thymeleafContext);
+            } else if (contract.getTitle().equals(ContractType.DEVOPS)) {
+                return templateEngine.process("person_contract_template_devops", thymeleafContext);
+
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid contract");
+        }
+
+        return null;
     }
 
     // Método para enviar um arquivo PDF para o serviço S3 da AWS

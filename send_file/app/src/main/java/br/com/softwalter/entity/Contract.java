@@ -1,11 +1,10 @@
 package br.com.softwalter.entity;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Contract {
     private String id;
-    private String title;
+    private ContractType title;
     private String description;
     private Date startDate;
     private Date endDate;
@@ -15,7 +14,7 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(String id, String title, String description, Date startDate, Date endDate, double value, String status) {
+    public Contract(String id, ContractType title, String description, Date startDate, Date endDate, double value, String status) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -33,11 +32,11 @@ public class Contract {
         this.id = id;
     }
 
-    public String getTitle() {
+    public ContractType getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(ContractType title) {
         this.title = title;
     }
 
