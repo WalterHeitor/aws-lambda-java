@@ -5,6 +5,7 @@ import br.com.softwalter.entity.Contract;
 import br.com.softwalter.dto.PersonDTO;
 import br.com.softwalter.entity.ContractType;
 import br.com.softwalter.entity.Person;
+import br.com.softwalter.util.HtmlGenerator;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -56,6 +57,7 @@ public class App implements RequestHandler<SQSEvent, Void> {
         // Inicializa a Template Engine
         templateEngine = new ThymeleafConfiguration().templateEngine();
     }
+    public final HtmlGenerator htmlGenerator = new HtmlGenerator(new ThymeleafConfiguration().templateEngine());
 
     // Método principal para processar eventos SQS
     @Override
@@ -70,9 +72,10 @@ public class App implements RequestHandler<SQSEvent, Void> {
                 Person person = personDTO.toEntity();
                 logger.debug("person: {}", person.toString());
                 List<Contract> contracts = getContractsFromDatabase(person.getId());
-                List<String>htmlContents = new ArrayList<>();
+                List<String> htmlContents = htmlGenerator.generateHtmlFromTemplates(person, contracts);
                 // Gera o conteúdo HTML a partir do template Thymeleaf e dos dados da pessoa
-                contracts.forEach(contract -> htmlContents.add(generateHtmlFromTemplate(person, contract)));
+
+//                contracts.forEach(contract -> htmlContents.add(generateHtmlFromTemplate(person, contract)));
 
                 // Converte o conteúdo HTML em um arquivo PDF
                 byte[] pdfBytes = createPdfFromHtml(htmlContents);
