@@ -217,4 +217,5 @@ public class App implements RequestHandler<SQSEvent, Void> {
         App app = new App();
         app.handleRequest(sqsEvent, null);
     }
+    // criar algorithm
 }

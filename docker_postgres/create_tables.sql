@@ -18,3 +18,52 @@ CREATE TABLE contract (
     person_id VARCHAR(255),
     FOREIGN KEY (person_id) REFERENCES person(id)
 );
+
+-- Inserir três pessoas
+INSERT INTO person (id, first_name, last_name, email, gender, ip_address) VALUES
+    ('1', 'João', 'Silva', 'joao@example.com', 'Male', '192.168.1.1'),
+    ('2', 'Maria', 'Santos', 'maria@example.com', 'Female', '192.168.1.2'),
+    ('3', 'Carlos', 'Oliveira', 'carlos@example.com', 'Male', '192.168.1.3');
+
+-- Inserir dez contratos para a primeira pessoa (João Silva)
+INSERT INTO contract (title, description, start_date, end_date, value, status, person_id) VALUES
+    ('BACKEND_JAVA', 'Projeto de desenvolvimento Java 1', '2024-01-01', '2024-12-31', 1000.00, 'Active', '1'),
+    ('FRONTEND_ANGULAR', 'Projeto de desenvolvimento Angular 1', '2024-01-01', '2024-12-31', 1200.00, 'Active', '1'),
+    ('MOBILE_IOS', 'Projeto de desenvolvimento iOS 1', '2024-01-01', '2024-12-31', 1500.00, 'Active', '1'),
+    ('MOBILE_ANDROID', 'Projeto de desenvolvimento Android 1', '2024-01-01', '2024-12-31', 1300.00, 'Active', '1'),
+    ('DEVOPS', 'Projeto de DevOps 1', '2024-01-01', '2024-12-31', 1800.00, 'Active', '1'),
+    ('BACKEND_JAVA', 'Projeto de desenvolvimento Java 2', '2024-01-01', '2024-12-31', 1000.00, 'Active', '1'),
+    ('FRONTEND_ANGULAR', 'Projeto de desenvolvimento Angular 2', '2024-01-01', '2024-12-31', 1200.00, 'Active', '1'),
+    ('MOBILE_IOS', 'Projeto de desenvolvimento iOS 2', '2024-01-01', '2024-12-31', 1500.00, 'Active', '1'),
+    ('MOBILE_ANDROID', 'Projeto de desenvolvimento Android 2', '2024-01-01', '2024-12-31', 1300.00, 'Active', '1'),
+    ('DEVOPS', 'Projeto de DevOps 2', '2024-01-01', '2024-12-31', 1800.00, 'Active', '1');
+
+-- Inserir dez contratos para a segunda pessoa (Maria Santos)
+INSERT INTO contract (title, description, start_date, end_date, value, status, person_id) VALUES
+    ('BACKEND_JAVA', 'Projeto de desenvolvimento Java 1', '2024-01-01', '2024-12-31', 1000.00, 'Active', '2'),
+    ('FRONTEND_ANGULAR', 'Projeto de desenvolvimento Angular 1', '2024-01-01', '2024-12-31', 1200.00, 'Active', '2'),
+    ('MOBILE_IOS', 'Projeto de desenvolvimento iOS 1', '2024-01-01', '2024-12-31', 1500.00, 'Active', '2'),
+    ('MOBILE_ANDROID', 'Projeto de desenvolvimento Android 1', '2024-01-01', '2024-12-31', 1300.00, 'Active', '2'),
+    ('DEVOPS', 'Projeto de DevOps 1', '2024-01-01', '2024-12-31', 1800.00, 'Active', '2'),
+    ('BACKEND_JAVA', 'Projeto de desenvolvimento Java 2', '2024-01-01', '2024-12-31', 1000.00, 'Active', '2'),
+    ('FRONTEND_ANGULAR', 'Projeto de desenvolvimento Angular 2', '2024-01-01', '2024-12-31', 1200.00, 'Active', '2'),
+    ('MOBILE_IOS', 'Projeto de desenvolvimento iOS 2', '2024-01-01', '2024-12-31', 1500.00, 'Active', '2'),
+    ('MOBILE_ANDROID', 'Projeto de desenvolvimento Android 2', '2024-01-01', '2024-12-31', 1300.00, 'Active', '2'),
+    ('DEVOPS', 'Projeto de DevOps 2', '2024-01-01', '2024-12-31', 1800.00, 'Active', '2');
+
+-- Inserir dez contratos para a terceira pessoa (Carlos Oliveira)
+INSERT INTO contract (title, description, start_date, end_date, value, status, person_id) VALUES
+    ('BACKEND_JAVA', 'Projeto de desenvolvimento Java 1', '2024-01-01', '2024-12-31', 1000.00, 'Active', '3'),
+    ('FRONTEND_ANGULAR', 'Projeto de desenvolvimento Angular 1', '2024-01-01', '2024-12-31', 1200.00, 'Active', '3'),
+    ('MOBILE_IOS', 'Projeto de desenvolvimento iOS 1', '2024-01-01', '2024-12-31', 1500.00, 'Active', '3'),
+    ('MOBILE_ANDROID', 'Projeto de desenvolvimento Android 1', '2024-01-01', '2024-12-31', 1300.00, 'Active', '3'),
+    ('DEVOPS', 'Projeto de DevOps 1', '2024-01-01', '2024-12-31', 1800.00, 'Active', '3'),
+    ('BACKEND_JAVA', 'Projeto de desenvolvimento Java 2', '2024-01-01', '2024-12-31', 1000.00, 'Active', '3'),
+    ('FRONTEND_ANGULAR', 'Projeto de desenvolvimento Angular 2', '2024-01-01', '2024-12-31', 1200.00, 'Active', '3'),
+    ('MOBILE_IOS', 'Projeto de desenvolvimento iOS 2', '2024-01-01', '2024-12-31', 1500.00, 'Active', '3'),
+    ('MOBILE_ANDROID', 'Projeto de desenvolvimento Android 2', '2024-01-01', '2024-12-31', 1300.00, 'Active', '3'),
+    ('DEVOPS', 'Projeto de DevOps 2', '2024-01-01', '2024-12-31', 1800.00, 'Active', '3');
+
+
+
+
