@@ -36,6 +36,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
     implementation("org.hibernate:hibernate-core:6.1.5.Final")
 
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation("org.postgresql:postgresql:42.7.2")
+
 
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple

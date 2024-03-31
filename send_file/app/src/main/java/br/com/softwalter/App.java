@@ -5,6 +5,8 @@ import br.com.softwalter.entity.Contract;
 import br.com.softwalter.dto.PersonDTO;
 import br.com.softwalter.entity.ContractType;
 import br.com.softwalter.entity.Person;
+import br.com.softwalter.repository.ContractRepository;
+import br.com.softwalter.util.HibernateUtil;
 import br.com.softwalter.util.HtmlGenerator;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.client.builder.AwsClientBuilder;
@@ -20,6 +22,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.html.simpleparser.HTMLWorker;
 import com.lowagie.text.pdf.PdfWriter;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.TemplateEngine;
@@ -32,6 +35,8 @@ import java.util.*;
 
 public class App implements RequestHandler<SQSEvent, Void> {
 
+    private static final Session SESSION = HibernateUtil.getSessionFactory().openSession();
+    private final ContractRepository contractRepository = new ContractRepository(SESSION);
     // Logger para registro de mensagens
     private static final Logger logger = LoggerFactory.getLogger(App.class.getName());
 
@@ -71,7 +76,8 @@ public class App implements RequestHandler<SQSEvent, Void> {
                 logger.debug("personDTO: {}", personDTO.toString());
                 Person person = personDTO.toEntity();
                 logger.debug("person: {}", person.toString());
-                List<Contract> contracts = getContractsFromDatabase(person.getId());
+                List<Contract> contracts = getContractsFromDatabasePostgres(person.getId());
+//                List<Contract> contracts = getContractsFromDatabase(person.getId());
                 List<String> htmlContents = htmlGenerator.generateHtmlFromTemplates(person, contracts);
                 // Gera o conteúdo HTML a partir do template Thymeleaf e dos dados da pessoa
 
@@ -92,7 +98,12 @@ public class App implements RequestHandler<SQSEvent, Void> {
         return null;
     }
 
-    public List<Contract> getContractsFromDatabase(String personId) {
+    public List<Contract> getContractsFromDatabasePostgres(Long personId) {
+
+        return contractRepository.findContractsByPersonId(personId);
+    }
+
+    public List<Contract> getContractsFromDatabase(Long personId) {
         // Lógica para buscar os contratos do banco de dados
         // Neste exemplo, apenas uma lista fictícia é retornada
 
@@ -123,7 +134,7 @@ public class App implements RequestHandler<SQSEvent, Void> {
             String status = random.nextBoolean() ? "Ativo" : "Inativo"; // Status aleatório entre Ativo e Inativo
 
             // Criando um novo contrato e adicionando à lista
-            Contract contract = new Contract(contractId, contractType, description, startDate, endDate, value, status);
+            Contract contract = new Contract(Long.parseLong(contractId), contractType, description, startDate, endDate, value, status);
             contracts.add(contract);
             i++;
         }
@@ -196,7 +207,7 @@ public class App implements RequestHandler<SQSEvent, Void> {
     public static void main(String[] args) {
         // Cria uma instância de SQSEvent.SQSMessage para simular uma mensagem do SQS
         SQSEvent.SQSMessage msg = new SQSEvent.SQSMessage();
-        msg.setBody("{\"id\":\"20\", \"first_name\":\"Francesca\", \"last_name\":\"Spirritt\", \"email\":\"fspirrittj@cisco.com\", \"gender\":\"Agender\", \"ip_address\":\"34.144.83.205\"}");
+        msg.setBody("{\"id\":\"2\", \"first_name\":\"Francesca\", \"last_name\":\"Spirritt\", \"email\":\"fspirrittj@cisco.com\", \"gender\":\"Agender\", \"ip_address\":\"34.144.83.205\"}");
 
         // Cria uma instância de SQSEvent contendo a mensagem
         SQSEvent sqsEvent = new SQSEvent();

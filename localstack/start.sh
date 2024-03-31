@@ -54,3 +54,6 @@ aws --endpoint http://localhost:4566 --profile localstack \
   --log-type Tail
 
 
+DATABASE_USERNAME=postgres;DATABASE_PASSWORD=postgres;DATABASE_NAME=postgres;DATABASE_SCHEMA=public;DATABASE_PORT=5432;DATABASE_HOST=localhost;
+
+

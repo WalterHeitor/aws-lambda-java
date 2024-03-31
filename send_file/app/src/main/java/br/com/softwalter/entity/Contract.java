@@ -1,20 +1,45 @@
 package br.com.softwalter.entity;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
+@Table(name = "contract")
 public class Contract {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "title")
     private ContractType title;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "start_date")
     private Date startDate;
+
+    @Column(name = "end_date")
     private Date endDate;
+
+    @Column(name = "value")
     private double value;
+
+    @Column(name = "status")
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     public Contract() {
     }
 
-    public Contract(String id, ContractType title, String description, Date startDate, Date endDate, double value, String status) {
+    public Contract(Long id, ContractType title, String description, Date startDate, Date endDate, double value, String status) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,11 +49,11 @@ public class Contract {
         this.status = status;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,5 +103,13 @@ public class Contract {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

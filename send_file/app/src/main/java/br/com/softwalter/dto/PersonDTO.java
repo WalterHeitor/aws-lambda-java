@@ -57,32 +57,13 @@ public class PersonDTO implements Serializable {
         return ipAddress;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PersonDTO personDTO = (PersonDTO) o;
-        return Objects.equals(id, personDTO.id) && Objects.equals(firstName, personDTO.firstName) && Objects.equals(lastName, personDTO.lastName) && Objects.equals(email, personDTO.email) && Objects.equals(gender, personDTO.gender) && Objects.equals(ipAddress, personDTO.ipAddress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, gender, ipAddress);
-    }
-
-    @Override
-    public String toString() {
-        return "Pessoa{" +
-                "id='" + id + '\'' +
-                ", first_name='" + firstName + '\'' +
-                ", last_name='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
-                ", ip_address='" + ipAddress + '\'' +
-                '}';
-    }
 
     public Person toEntity() {
-        return new Person(id, firstName, lastName, email, gender, ipAddress);
+        return  new Person(Long.parseLong(this.id),
+                this.firstName,
+                this.lastName,
+                this.email,
+                this.gender,
+                this.ipAddress);
     }
 }

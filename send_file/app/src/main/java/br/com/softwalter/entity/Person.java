@@ -1,25 +1,40 @@
 package br.com.softwalter.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class Person implements Serializable {
+@Entity
+@Table(name = "person")
+public class Person implements Serializable{
 
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("first_name")
+    @Id
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
-    @JsonProperty("last_name")
+
+    @Column(name = "last_name")
     private String lastName;
-    @JsonProperty("email")
+
+    @Column(name = "email")
     private String email;
-    @JsonProperty("gender")
+
+    @Column(name = "gender")
     private String gender;
-    @JsonProperty("ip_address")
+
+    @Column(name = "ip_address")
     private String ipAddress;
 
-    public Person(String id, String firstName, String lastName, String email, String gender, String ipAddress) {
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Contract> contracts;
+
+    public Person() {
+    }
+
+    public Person(Long id, String firstName, String lastName, String email, String gender, String ipAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,7 +43,7 @@ public class Person implements Serializable {
         this.ipAddress = ipAddress;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
